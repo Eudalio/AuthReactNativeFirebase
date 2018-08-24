@@ -1,9 +1,34 @@
 import React from 'react';
-import { StyleSheet, Platform, Image, Text, View, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Platform,
+  Image,
+  Text,
+  View,
+} from 'react-native';
 
-import firebase from 'react-native-firebase';
+import { SwitchNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
+// import the different screen
+import Loading from './Loading';
+import SignUp from './SignUp';
+import Login from './Login';
+import Main from './Main';
+
+// create our app's navigation stack
+const App = SwitchNavigator(
+  {
+    Loading,
+    SignUp,
+    Login,
+    Main,
+  },
+  {
+    initialRouteName: 'Loading',
+  }
+);
+export default App;
+/*  extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -97,3 +122,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 });
+ */
