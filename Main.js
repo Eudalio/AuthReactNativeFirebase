@@ -5,6 +5,8 @@ import {
   Image,
   Text,
   View,
+  Button,
+  Alert,
 } from 'react-native';
 
 import firebase from 'react-native-firebase';
@@ -20,6 +22,21 @@ export default class Main extends Component {
     this.setState({ currentUser })
   }
 
+  handleSignOut = () => {
+    this.setState({ currentUser: null })
+    firebase.auth().signOut().then(() => this.props.navigation.navigate('Loading'))
+  }
+
+  logout = () => {
+    Alert.alert(
+      "Tem certeza que deseja sair?",
+      '',
+      [
+        { text: 'Cancel', style: 'cancel'},
+        { text: 'OK', onPress: this.handleSignOut},
+      ],)
+  }
+
   render() {
     const { currentUser } = this.state
 
@@ -28,6 +45,9 @@ export default class Main extends Component {
         <Text>
           Hello {currentUser && currentUser.email}!
         </Text>
+        <Button
+          title="Sair"
+          onPress={this.logout} />
       </View>
     );
   }
